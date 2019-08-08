@@ -37,16 +37,6 @@ load() ->
 not_loaded(Line) ->
     erlang:nif_error({error, {not_loaded, [{module, ?MODULE}, {line, Line}]}}).
 
-priv()->
-  case code:priv_dir(?MODULE) of
-      {error, _} ->
-          EbinDir = filename:dirname(code:which(?MODULE)),
-          AppPath = filename:dirname(EbinDir),
-          filename:join(AppPath, "priv");
-      Path ->
-          Path
-  end.
-
 %%
 time_taken_to_execute(F) -> Start = os:timestamp(),
   F(),
